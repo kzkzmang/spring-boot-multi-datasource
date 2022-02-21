@@ -1,0 +1,50 @@
+spring:
+  redis:
+    host: [host]
+    database: 0
+    port: 6379
+    password: [password]
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    master:
+      hikari:
+        username: [username]
+        password: [password]
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/database?useSSL=false&useUnicode=true&characterEncoding=utf8
+    slave:
+      hikari:
+        username: [username]
+        password: [password]
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3307/database?useSSL=false&useUnicode=true&characterEncoding=utf8
+    postresql:
+      username: [username]
+      password: [password]
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/database?charSet=utf-8&prepareThreshold=1
+  session:
+    store-type: redis
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: kr.co.test.dto
+  configuration:
+    map-underscore-to-camel-case: true
